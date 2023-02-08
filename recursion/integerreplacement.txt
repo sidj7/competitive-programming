@@ -1,0 +1,21 @@
+class Solution {
+public:
+    long long help(long long int n) {
+        long long j=0;
+        if(n==1)return 0;
+        if(n%2==0)
+        {
+            j=1+help(n/2);
+        }
+        else
+        {
+            j=1+min(help(n+1),help(n-1));
+        }
+        return (int)j;
+    }
+    int integerReplacement(int n) {
+        long long int x=n;
+        return (int)help(x);
+    }
+    
+};
