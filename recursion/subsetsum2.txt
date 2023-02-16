@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void help(int ind,vector<int>&nums,vector<int>arr,set<vector<int>>&res)
+    {
+        if(ind==nums.size())
+        {
+            res.insert(arr);
+            return;
+        }
+        arr.push_back(nums[ind]);
+        help(ind+1,nums,arr,res);
+        arr.pop_back();
+        help(ind+1,nums,arr,res);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        set<vector<int>>res;
+        help(0,nums,{},res);
+        vector<vector<int>>sol;
+        for(auto i:res)sol.push_back(i);
+        return sol;
+    }
+};

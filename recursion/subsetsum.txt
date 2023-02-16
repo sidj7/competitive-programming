@@ -1,0 +1,22 @@
+class Solution
+{
+public:
+    void help(int i,int n,vector<int>arr,vector<int>&res,int sum)
+    {
+        if(i==n)
+        {
+            res.push_back(sum);
+            return;
+        }
+        help(i+1,n,arr,res,sum+arr[i]);
+        help(i+1,n,arr,res,sum);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int>res;
+        help(0,N,arr,res,0);
+        return res;
+    }
+};
+
+gfg

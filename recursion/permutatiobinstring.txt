@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+void help(string t,string &s,vector<bool>&dp,vector<string>&res)
+{
+    if(t.size()==s.size())
+    {
+        res.push_back(t);
+        return;
+    }
+    for(int i=0;i<s.size();i++)
+    {
+        if(dp[i]==true)continue;
+        dp[i]=true;
+        t.push_back(s[i]);
+        help(t,s,dp,res);
+        t.pop_back();
+        dp[i]=false;
+    }
+}
+int main()
+{
+    string s="sid";
+    vector<bool>a(3,false);
+    vector<string>res;
+    help("",s,a,res);
+    for(auto i:res)cout<<i<<endl;
+    return 0;
+
+}

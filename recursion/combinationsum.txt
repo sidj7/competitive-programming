@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void help(vector<vector<int>>&res,vector<int>&c,int t,vector<int>sol,int i)
+    {
+        
+        if(t<0 || i>=c.size())return;
+        if(t==0)
+        {
+            res.push_back(sol);
+            return;
+        }
+        sol.push_back(c[i]);
+        help(res,c,t-c[i],sol,i);
+        sol.pop_back();
+        help(res,c,t,sol,i+1);
+    }
+    vector<vector<int>> combinationSum(vector<int>& c, int t) {
+        vector<vector<int>>res;
+        help(res,c,t,{},0);
+        return res;
+    }
+};

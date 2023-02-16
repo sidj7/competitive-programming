@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& re, vector<vector<int>>& be) {
+        vector<pair<int,int>>res[n+1];
+        for(auto i:re)
+        {
+            res[i[0]].push_back({i[1],1});
+        }
+        for(auto i:be)
+        {
+            res[i[0]].push_back({i[1],2});
+        }
+        vector<int>ans(n,-1);
+        queue<vector<int>>q;
+        q.push({0,0,-1});
+        while(q.size()>0)
+        {
+            vector<int>i=q.front();
+            q.pop();
+            int curr=i[0];
+            int dis=i[1];
+            int col=i[2];
+            if(ans[curr]==-1)
+            {
+                ans[curr]=dis;
+            }
+            for(auto &it:res[curr])
+            {
+                int child=it.first,childcol=it.second;
+                if(child!=-1 && (col==-1 || childcol!=col))
+                {
+                    it.first=-1;
+                    q.push({child,dis+1,childcol});
+                }
+            }
+        }
+        return ans;
+        
+        
+    }
+};

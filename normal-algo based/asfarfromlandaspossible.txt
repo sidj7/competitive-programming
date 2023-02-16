@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool isval(int r,int c,int n)
+    {
+        if(r>=0 && r<n && c>=0 && c<n) return true;
+        return false;
+    }
+    int maxDistance(vector<vector<int>>& grid) {
+        int n=grid.size();
+        vector<vector<int>>dis(n,vector<int>(n,-1));
+        queue<pair<int,int>>q;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1){
+                    dis[i][j]=0;
+                    q.push({i,j});
+                }
+            }
+        }
+        int ans=0;
+        vector<int>dc={0,0,1,-1};
+        vector<int>dr={1,-1,0,0};
+        while(!q.empty()){
+            pair<int,int>it=q.front();
+            q.pop();
+            int r=it.first;
+            int c=it.second;
+            if(grid[r][c]==0) ans=max(ans,dis[r][c]);
+            for(int i=0;i<4;i++){
+                int nc=c+dc[i];
+                int nr=r+dr[i];
+                if(isval(nr,nc,n) && dis[nr][nc]==-1){
+                    dis[nr][nc]=dis[r][c]+1;
+                    q.push({nr,nc});
+                }
+            }
+        }
+        return ans==0?-1:ans;
+    }
+};

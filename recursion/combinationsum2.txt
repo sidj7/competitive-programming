@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void help(int n,int t,vector<int>& c,vector<int>res,vector<vector<int>>&sol)
+    {
+        if(t==0)
+        {
+            sol.push_back(res);
+            return;
+        }
+        for(int i=n;i<c.size();i++)
+        {
+            if(i!=n && c[i]<=c[i-1])continue;
+            if(c[i]>t)break;
+            res.push_back(c[i]);
+            help(i+1,t-c[i],c,res,sol);
+            res.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& c, int t) {
+        vector<vector<int>>sol;
+        sort(c.begin(),c.end());
+        help(0,t,c,{},sol);
+        return sol;
+    }
+};
